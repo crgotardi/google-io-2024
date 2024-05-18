@@ -1,0 +1,89 @@
+<html lang="en">
+    <meta charset="UTF-8">
+    <head>
+        <title>Scroll Driven animation</title>
+    </head>
+    <body>
+        <style>
+            * {
+                box-sizing: border-box;
+                padding: 0;
+                margin: 0;
+
+                font-family: 'Roboto', sans-serif
+            }
+
+            :root {
+                --background-light: #EDEDED;
+                --text: #141414;
+            }
+
+            main {
+                section {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    gap: 2rem;
+                    flex-wrap: wrap;
+                    margin: 30% auto;
+                }
+
+                .card {
+                    display: block;
+                    width: fit-content;
+                    margin: 1rem;
+                    padding: 1rem;
+                    border-radius: 1rem;
+                    background-color: var(--background-light);
+                    color: var(--text);
+                }
+            }
+
+            
+            /* check if user prefers reduced motion */
+            @media (prefers-reduced-motion: no-preference) {
+                /* check if animation-timeline is supported */
+                @supports (animation-timeline: scroll()) {
+                    .card {
+                        animation: fade-in linear both;
+                        animation-timeline: view();
+                        animation-range: contain;
+                    }
+                }
+            }
+
+            @keyframes fade-in {
+                0% {
+                    opacity: 0;
+                }
+                40%, 60% {
+                    opacity: 1;
+                    transform: scale(1.1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(1);
+                }
+            }
+        </style>
+        <main>
+            <section></section>
+        </main>
+
+        <script>
+            const sectionEl = document.querySelector('section');
+
+            for (let i = 0; i < 30; i++) {
+                const cardEl = document.createElement('div');
+                cardEl.classList.add('card');
+                cardEl.innerHTML = `
+                    <img src="https://placehold.co/200x200">
+                    <h2>Card ${i + 1}</h2>
+                    <p>Card description</p>
+                `;
+                sectionEl.appendChild(cardEl);
+            }
+        </script>
+    </body>
+</html>
+</html>
