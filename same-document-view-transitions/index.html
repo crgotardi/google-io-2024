@@ -1,0 +1,133 @@
+<html lang="en">
+    <meta charset="UTF-8">
+    <head>
+        <title>Same document view transitions</title>
+        <link rel="stylesheet" href="../style/default.css">
+    </head>
+    <body>
+        <style>
+            ::view-transition-old(root),
+            ::view-transition-new(root) {
+                animation-duration: 0.2s;
+            }
+
+            main {
+                display: flex;
+            }
+
+            section {
+                flex: 4;
+
+                .container {
+                    margin: 2rem auto;
+                    padding: 1rem;
+                    background-color: var(--background-light);
+                    color: var(--text-dark);
+    
+                    .list {
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        justify-content: space-around;
+                        gap: 1rem;
+                        view-transition-name: list;
+    
+                        .list-item {
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            padding: 1rem;
+                            background-color: var(--background-white);
+    
+                            .item-actions {
+                                display: flex;
+                                gap: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            aside {
+                flex: 1;
+                height: 100dvh;
+                padding: 2rem;
+                display: none;
+
+                &.is-open {
+                    display: block;
+                }
+
+                .sidebar-header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 3rem;
+                }
+            }
+        </style>
+
+        <main>
+            <section>
+                <div class="container">
+                    <div class="list">
+                        <div class="list-item">
+                            <span>Item 1</span>
+                            <div class="item-actions">
+                                <button class="action-edit button-primary">Edit</button>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <span>Item 2</span>
+                            <div class="item-actions">
+                                <button class="action-edit button-primary">Edit</button>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <span>Item 3</span>
+                            <div class="item-actions">
+                                <button class="action-edit button-primary">Edit</button>
+                            </div>
+                        </div>
+                        <div class="list-item">
+                            <span>Item 4</span>
+                            <div class="item-actions">
+                                <button class="action-edit button-primary">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <aside>
+                <div class="sidebar-header">
+                    <h2>Edit item</h2>
+                    <button class="close-action button-primary">x</button>
+                </div>
+                <div class="sidebar-content">
+                    <p>Some dialog content</p>
+                </div>
+            </aside>
+        </main>
+
+        <script>
+            document.querySelectorAll('.action-edit').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.startViewTransition(() => {
+                        const sidebar = document.querySelector('aside')
+                        sidebar.querySelector('h2').textContent = `Edit ${btn.closest('.list-item').querySelector('span').textContent}`
+                        sidebar.classList.add('is-open')
+                    })
+                })
+            })
+
+            document.querySelector('.close-action').addEventListener('click', () => {
+                document.startViewTransition(() => {
+                    document.querySelector('aside').classList.remove('is-open')
+                })
+            })
+        </script>
+    </body>
+</html>
+</html>

@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif
+}
+
+:root {
+    --background-white: #FFF;
+    --background-light: #EDEDED;
+    --text: #141414;
+}
+
+button {
+    outline: 0;
+    box-shadow: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;    
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &.button-primary {
+        color: #FFF;
+        background-color: #5C5C5C;
+
+        &:hover {
+            background-color: #424242;
+        }
+    }
+
+    &.button-danger {
+        color: #FFF;
+        background-color: #FF0000;
+
+        &:hover {
+            background-color: #CC0000;
+        }
+    }
+}
