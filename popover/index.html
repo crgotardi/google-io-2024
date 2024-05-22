@@ -1,0 +1,36 @@
+<html lang="en">
+    <meta charset="UTF-8">
+    <head>
+        <title>Popover API</title>
+        <link rel="stylesheet" href="../style/default.css">
+    </head>
+    <body>
+        <style>
+            main {
+                width: 100%;
+                height: 100dvh;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            [popover] {
+                margin: 30px auto;
+                padding: 1rem 1.5rem;
+                border-radius: 1rem;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
+        </style>
+
+        <main>
+            <button popovertarget="my-popover">Open popover</button>
+            <div id="my-popover" popover>
+                <span>Popover message here</span>
+            </div>
+        </main>
+    </body>
+</html>
+</html>
